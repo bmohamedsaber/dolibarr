@@ -1,6 +1,6 @@
 -- ============================================================================
--- Copyright (C) 2003      Rodolphe Quiedeville <rodolphe@quiedeville.org>
--- Copyright (C) 2005-2006 Laurent Destailleur  <eldy@users.sourceforge.net>
+-- Copyright (C) 2009 Laurent Destailleur <eldy@users.sourceforge.net>
+-- Copyright (C) 2009 Regis Houssin       <regis.houssin@capnetworks.com>
 --
 -- This program is free software; you can redistribute it and/or modify
 -- it under the terms of the GNU General Public License as published by
@@ -15,11 +15,13 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program. If not, see <http://www.gnu.org/licenses/>.
 --
--- ===========================================================================
+-- ============================================================================
 
 
---ALTER TABLE llx_horaires ADD INDEX idx_accountingaccount_fk_pcg_version (fk_pcg_version);
+--ALTER TABLE llx_horaires ADD UNIQUE INDEX uk_adherent_login (login, entity);
+--ALTER TABLE llx_adherent ADD UNIQUE INDEX uk_adherent_fk_soc (fk_soc);
 
---ALTER TABLE llx_horaires ADD CONSTRAINT fk_accountingaccount_fk_pcg_version  FOREIGN KEY (fk_pcg_version)    REFERENCES llx_accounting_system (pcg_version);
+--ALTER TABLE llx_adherent ADD INDEX idx_adherent_fk_adherent_type (fk_adherent_type);
 
---ALTER TABLE llx_accountingaccount ADD CONSTRAINT fk_accountingaccount_fk_account_number  FOREIGN KEY (fk_account_number)    REFERENCES llx_accountingaccount (account_number);
+--ALTER TABLE llx_horaires ADD CONSTRAINT adherent_fk_soc FOREIGN KEY (fk_soc) REFERENCES llx_societe (rowid);
+ALTER TABLE llx_horaires ADD CONSTRAINT fk_horaires_param_type FOREIGN KEY (fk_horaires_param)    REFERENCES llx_horaires_param (rowid);
